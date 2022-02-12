@@ -325,7 +325,7 @@ func (gen *Generator) renderMarkdown(path string) (err error) {
 		return
 	}
 	// This is going to haunt me for a while.
-	intermediate := string(markdown.Run(input, markdown.WithNoExtensions()))
+	intermediate := string(markdown.Run(input))
 	md := []byte(html.UnescapeString(intermediate))
 	return gen.render(path, md)
 }
@@ -492,7 +492,7 @@ func (gen *Generator) Markdown(e *goquery.Selection, doc *goquery.Document, data
 		if err != nil {
 			return err
 		}
-		md := markdown.Run(mdInput, markdown.WithNoExtensions())
+		md := markdown.Run(mdInput)
 		mdDoc, err := gen.parseAndReplace(*bytes.NewBuffer(md), data)
 		if err != nil {
 			return err
